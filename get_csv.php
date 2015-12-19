@@ -20,6 +20,7 @@ foreach($csv as $key => $value) {
 		}
 	} else {
 		$game = array();
+		$game['Date']		= date("Y-m-d", strtotime($value[$csv_pos['Date']]));;
 		$game['HomeTeam'] 	= $value[$csv_pos['HomeTeam']];
 		$game['AwayTeam'] 	= $value[$csv_pos['AwayTeam']];
 		$game['FTHG'] 		= intval($value[$csv_pos['FTHG']]);
