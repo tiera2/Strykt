@@ -19,12 +19,12 @@ foreach($csv as $key => $value) {
 			$csv_pos[$headname] = $headpos;
 		}
 	} else {
-		$gam = array();
-		$gam['HomeTeam'] 	= $value[$csv_pos['HomeTeam']];
-		$gam['AwayTeam'] 	= $value[$csv_pos['AwayTeam']];
-		$gam['FTHG'] 		= intval($value[$csv_pos['FTHG']]);
-		$gam['FTAG']		= intval($value[$csv_pos['FTAG']]);
-		$games[] = $gam;
+		$game = array();
+		$game['HomeTeam'] 	= $value[$csv_pos['HomeTeam']];
+		$game['AwayTeam'] 	= $value[$csv_pos['AwayTeam']];
+		$game['FTHG'] 		= intval($value[$csv_pos['FTHG']]);
+		$game['FTAG']		= intval($value[$csv_pos['FTAG']]);
+		$games[] = $game;
 	}
 }
 echo json_encode($games);
