@@ -6,6 +6,7 @@ http://www.football-data.co.uk/notes.txt
 
 file_put_contents('E0.csv', fopen('http://www.football-data.co.uk/mmz4281/1516/E0.csv', 'r'));
 $csv = array_map('str_getcsv', file('E0.csv'));
+unlink('E0.csv');
 $csv_pos = array();
 $games = array();
 
@@ -16,28 +17,16 @@ foreach($csv as $key => $value) {
 			$csv_pos[$headname] = $headpos;
 		}
 	} else {
-			$game = new Game($value[$csv_pos['HomeTeam']], $value[$csv_pos['AwayTeam']]);
-			$game->setScore($value[$csv_pos['FTHG']] . '-' . $value[$csv_pos['FTAG']]);
-			$games[] = $game;
+		$gam = array();
+		$gam['HomeTeam'] 	= $value[$csv_pos['HomeTeam']];
+		$gam['AwayTeam'] 	= $value[$csv_pos['AwayTeam']];
+		$gam['FTHG'] 		= intval($value[$csv_pos['FTHG']]);
+		$gam['FTAG']		= intval($value[$csv_pos['FTAG']]);
+		$games[] = $gam;
 	}
 }
-print_r($games);
+echo json_encode($games);
 
-class Game 
-{
-	private $homeTeam, $awayTeam;
-	private $homeScore, $awayScore;
-	
-	public function __construct($ht, $at) {
-		$this->homeTeam = $ht;
-		$this->awayTeam = $at;
-	}
-	
-	function setScore($hg, $ag) {
-		$this->homeScore = intval($hg);
-		$this->awayScore = intval($ag);
-	}
-}
 
 
 ?>
