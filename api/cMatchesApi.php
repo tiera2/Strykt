@@ -20,11 +20,11 @@ class MatchesApi {
 				}
 			} else {
 				$game = array();
-				$game['Date']		= date("Y-m-d", strtotime($value[$csv_pos['Date']]));;
+				$game['Date']		= DateTime::createFromFormat('d/m/y', $value[$csv_pos['Date']])->format('Y-m-d');
 				$game['HomeTeam'] 	= $value[$csv_pos['HomeTeam']];
 				$game['AwayTeam'] 	= $value[$csv_pos['AwayTeam']];
-				$game['FTHG'] 		= intval($value[$csv_pos['FTHG']]);
-				$game['FTAG']		= intval($value[$csv_pos['FTAG']]);
+				$game['HomeGoals'] 	= intval($value[$csv_pos['FTHG']]);
+				$game['AwayGoals']	= intval($value[$csv_pos['FTAG']]);
 				$games[] = $game;
 			}
 		}
