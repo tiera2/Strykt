@@ -1,0 +1,1 @@
+Thou shalt not use this code for evil!
