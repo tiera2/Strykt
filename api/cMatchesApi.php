@@ -28,7 +28,7 @@ class MatchesApi {
 				$games[] = $game;
 			}
 		}
-		echo json_encode($games);
+		return json_encode($games);
 	}
 }
 ?>
