@@ -22,8 +22,8 @@ $app->get('/api/matches', function (Request $request, Response $response) {
 
 $app->get('/', function (Request $request, Response $response) {
 	/** Egentligen ska man inte behöva ange index.php här men man behöver url rewriting först tror jag **/
-	$response->getBody()->write("kör denna för att hämta matcher <a href='index.php/api/matches'>länk</a><br />
-	Kör <a href='index.php/api/stryktipset'>denna</a> för att hämta stryktipsmatcherna");
+	$response->getBody()->write("kör denna för att hämta matcher <a href='api/matches'>länk</a><br />
+	Kör <a href='api/stryktipset'>denna</a> för att hämta stryktipsmatcherna");
 	return $response;
 });
 $app->run();
