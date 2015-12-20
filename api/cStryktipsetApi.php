@@ -43,12 +43,12 @@ class StryktipsetAPI {
 			$teams = explode('-', $temp[1]);
 			$result = explode('-', $temp[2]);
 			$row = array();
-			$row['matchNo'] 	= $temp[0];
-			$row['homeTeam'] 	= $teams[0];
-			$row['awayTeam'] 	= $teams[1];
-			$row['homeGoal'] 	= $result[0];
-			$row['awayGoal'] 	= $result[1];
-			$row['sign'] 		= $temp[3];
+			$row['MatchNo'] 	= intval($temp[0]);
+			$row['HomeTeam'] 	= $teams[0];
+			$row['AwayTeam'] 	= $teams[1];
+			$row['HomeGoal'] 	= intval($result[0]);
+			$row['AwayGoal'] 	= intval($result[1]);
+			$row['Sign'] 		= $temp[3];
 			$rows[] = $row;
 		}
 		return json_encode($rows);

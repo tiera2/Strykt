@@ -5,10 +5,9 @@ http://www.football-data.co.uk/notes.txt
 **/
 class MatchesApi {
 
-	public static function getCsv() {
+	public static function getMatches() {
 		file_put_contents('E0.csv', fopen('http://www.football-data.co.uk/mmz4281/1516/E0.csv', 'r'));
 		$csv = array_map('str_getcsv', file('E0.csv'));
-		unlink('E0.csv');
 		$csv_pos = array();
 		$games = array();
 
@@ -29,6 +28,18 @@ class MatchesApi {
 			}
 		}
 		return json_encode($games);
+	}
+	
+	public static function getTeam($team) {
+		$matches = MatchesApi::getMatches();
+		$returnArr = array();
+		$matches = json_decode($matches);
+		foreach($matches as $key => $value) {
+			if($value->HomeTeam === $team || $value->AwayTeam === $team) {
+				$returnArr[] = $value;
+			}
+		}
+		return json_encode($returnArr);
 	}
 }
 ?>
