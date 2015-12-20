@@ -30,7 +30,8 @@ $app->get('/api/matches/{team}', function (Request $request, Response $response,
 $app->get('/', function (Request $request, Response $response) {
 	$response->getBody()->write("kör denna för att hämta matcher <a href='api/matches'>länk</a><br />
 	Kör <a href='api/stryktipset'>denna</a> för att hämta stryktipsmatcherna<br />
-	Hämta Liverpools matcher <a href='api/matches/Liverpool'>här</a>");
+	Hämta Liverpools matcher <a href='api/matches/Liverpool'>här</a><br />
+	Hämta matcher med Arsenal och Liverpool <a href='api/matches/Liverpool,Arsenal'>här</a>");
 	return $response;
 });
 

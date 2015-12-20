@@ -31,15 +31,25 @@ class MatchesApi {
 	}
 	
 	public static function getTeam($team) {
-		$matches = MatchesApi::getMatches();
+		$teams = explode(',', $team);
 		$returnArr = array();
-		$matches = json_decode($matches);
-		foreach($matches as $key => $value) {
-			if($value->HomeTeam === $team || $value->AwayTeam === $team) {
-				$returnArr[] = $value;
+		//Control that max two teams are sent in
+		if(count($teams)<3) {
+			$twoTeams = count($teams) == 2;
+			$matches = json_decode(MatchesApi::getMatches());
+			foreach($matches as $key => $value) {
+				if($twoTeams) {
+					if($value->HomeTeam === $teams[0] && $value->AwayTeam === $teams[1] ||
+						$value->HomeTeam === $teams[1] && $value->AwayTeam === $teams[0]) {
+						$returnArr[] = $value;
+					}
+				} else {
+					if($value->HomeTeam === $teams[0] || $value->AwayTeam === $teams[0]) {
+						$returnArr[] = $value;
+					}
+				}
 			}
 		}
 		return json_encode($returnArr);
 	}
 }
-?>
