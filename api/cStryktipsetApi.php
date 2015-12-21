@@ -2,8 +2,8 @@
 
 include_once('simple_html_dom.php');
 
-class StryktipsetAPI {
-
+class StryktipsetAPI 
+{
 	public static function getRow() {
 		// Create DOM from URL or file
 		$html = file_get_html("http://www.svt.se/svttext/tvu/pages/551.html");

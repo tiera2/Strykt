@@ -6,14 +6,27 @@ require 'vendor/autoload.php';
 
 $app = new \Slim\App;
 
-$app->get('/api/stryktipset[/]', function (Request $request, Response $response) {
+$app->add(function (Request $request, Response $response, callable $next) {
+    $uri = $request->getUri();
+    $path = $uri->getPath();
+    if ($path != '/' && substr($path, -1) == '/') {
+        // permanently redirect paths with a trailing slash
+        // to their non-trailing counterpart
+        $uri = $uri->withPath(substr($path, 0, -1));
+        return $response->withRedirect((string)$uri, 301);
+    }
+
+    return $next($request, $response);
+});
+
+$app->get('/api/stryktipset', function (Request $request, Response $response) {
 	$response = $response->withHeader('Content-type', 'application/json');
 	require 'api/cStryktipsetApi.php';
 	$response->getBody()->write(StryktipsetApi::getRow());
 	return $response;
 });
 
-$app->get('/api/matches[/]', function (Request $request, Response $response) {
+$app->get('/api/matches', function (Request $request, Response $response) {
 	$response = $response->withHeader('Content-type', 'application/json');
 	require 'api/cMatchesApi.php';
 	$response->getBody()->write(MatchesApi::getMatches());
@@ -36,4 +49,3 @@ $app->get('/', function (Request $request, Response $response) {
 });
 
 $app->run();
-
