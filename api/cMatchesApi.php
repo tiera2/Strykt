@@ -6,8 +6,9 @@ http://www.football-data.co.uk/notes.txt
 class MatchesApi 
 {
 	public static function getMatches() {
-		file_put_contents('E0.csv', fopen('http://www.football-data.co.uk/mmz4281/1516/E0.csv', 'r'));
-		$csv = array_map('str_getcsv', file('E0.csv'));
+		$filename = 'E0.csv';
+		MatchesApi::loadFile($filename);
+		$csv = array_map('str_getcsv', file($filename));
 		$csv_pos = array();
 		$games = array();
 
@@ -51,5 +52,22 @@ class MatchesApi
 			}
 		}
 		return json_encode($returnArr);
+	}
+	
+	/**
+	 * Load file from football-data if no new cached is available
+	 *
+	 * @param string $filename Name of the saved file
+	 */
+	private static function loadFile($filename) {
+		$downloadFile = !file_exists($filename);
+		if(!$downloadFile) {
+			$fileDate = date('y-m-d', filemtime($filename));
+			$today = date('y-m-d');
+			$downloadFile = $fileDate !== $today;
+		}
+		if($downloadFile) {
+			file_put_contents($filename, fopen('http://www.football-data.co.uk/mmz4281/1516/E0.csv', 'r'));
+		}
 	}
 }
