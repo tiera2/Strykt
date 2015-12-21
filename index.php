@@ -21,14 +21,7 @@ $app->add(function (Request $request, Response $response, callable $next) {
 
 
 $app->get('/api/stryktipset', function (Request $request, Response $response) {
-	//$response = $response->withHeader('Content-type', 'application/json');
-	require 'api/cStryktipsetApi.php';
-	$response->getBody()->write(StryktipsetApi::getThisWeek());
-	return $response;
-});
-
-$app->get('/api/stryktipset/last', function (Request $request, Response $response) {
-	$response = $response->withHeader('Content-type', 'application/json');
+    $response = $response->withHeader('Content-type', 'application/json');
 	require 'api/cStryktipsetApi.php';
 	$response->getBody()->write(StryktipsetApi::getThisWeek());
 	return $response;
