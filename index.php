@@ -21,7 +21,7 @@ $app->add(function (Request $request, Response $response, callable $next) {
 
 
 $app->get('/api/stryktipset', function (Request $request, Response $response) {
-    $response = $response->withHeader('Content-type', 'application/json');
+	$response = $response->withHeader('Content-type', 'application/json');
 	require 'api/cStryktipsetApi.php';
 	$response->getBody()->write(StryktipsetApi::getThisWeek());
 	return $response;
@@ -35,17 +35,22 @@ $app->get('/api/stryktipset/last', function (Request $request, Response $respons
 });
 
 $app->get('/api/matches', function (Request $request, Response $response) {
-	$response = $response->withHeader('Content-type', 'application/json');
+	//$response = $response->withHeader('Content-type', 'application/json');
 	require 'api/cMatchesApi.php';
-	$response->getBody()->write(MatchesApi::getMatches());
-	return $response;
+	header("Content-Type: application/json");
+	echo MatchesApi::getMatches();
+	// Add exit to prevent that last characters is cut off
+	// http://stackoverflow.com/questions/8811588/webkit-cutting-off-last-character-of-a-json-feed
+	exit;
 });
 
 $app->get('/api/matches/{team}', function (Request $request, Response $response, $args) {
-	$response = $response->withHeader('Content-type', 'application/json');
 	require 'api/cMatchesApi.php';
-	$response->getBody()->write(MatchesApi::getTeam($args['team']));
-	return $response;
+	header("Content-Type: application/json");
+	echo MatchesApi::getTeam($args['team']);
+	// Add exit to prevent that last characters is cut off
+	// http://stackoverflow.com/questions/8811588/webkit-cutting-off-last-character-of-a-json-feed
+	exit;
 });
 
 $app->get('/', function (Request $request, Response $response) {
