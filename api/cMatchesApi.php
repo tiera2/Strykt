@@ -29,10 +29,15 @@ class MatchesApi
 					} else {
 						$game = array();
 						$game['Date']		= trim(DateTime::createFromFormat('d/m/y', $value[$csv_pos['Date']])->format('Y-m-d'));
+						$game['League']		= $league;
+						$game['Season']		= $season;
 						$game['HomeTeam'] 	= trim($value[$csv_pos['HomeTeam']]);
 						$game['AwayTeam'] 	= trim($value[$csv_pos['AwayTeam']]);
 						$game['HomeGoals'] 	= intval(trim($value[$csv_pos['FTHG']]));
 						$game['AwayGoals']	= intval(trim($value[$csv_pos['FTAG']]));
+						$game['Winner'] 	= $game['HomeGoals'] > $game['AwayGoals'] 		? $game['HomeTeam']	: 
+												($game['HomeGoals'] == $game['AwayGoals'] 	? 'Draw' 			:
+												$game['AwayTeam']);
 						$games[] = $game;
 					}
 				}
@@ -54,13 +59,14 @@ class MatchesApi
 	* 
 	* @param string $team - Specified team(s). Separate team names with ,
 	*/
-	public static function getTeam($team) {
+	public static function getTeam($team, $limit=500) {
+		if($limit == 0) $limit = 5000;
 		$teams = explode(',', $team);
 		$returnArr = array();
 		//Control that max two teams are sent in
 		if(count($teams)<3) {
 			$twoTeams = count($teams) == 2;
-			$matches = json_decode(MatchesApi::getMatches(), true);
+			$matches = json_decode(MatchesApi::getMatches($limit), true);
 			foreach($matches as $value) {
 				if($twoTeams) {
 					if($value['HomeTeam'] === $teams[0] && $value['AwayTeam'] === $teams[1] ||
@@ -71,6 +77,9 @@ class MatchesApi
 					if($value['HomeTeam'] === $teams[0] || $value['AwayTeam'] === $teams[0]) {
 						$returnArr[] = $value;
 					}
+				}
+				if(count($returnArr) >= $limit) {
+					break;
 				}
 			}
 		}

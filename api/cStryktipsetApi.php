@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 include_once('simple_html_dom.php');
 
@@ -58,7 +58,6 @@ class StryktipsetAPI
 		// Create DOM from URL or file
 		$html = file_get_html("http://www.svt.se/svttext/tvu/pages/552.html");
 		$pre = $html->find('pre[class]', 0);
-		$span = $pre->find('span');
 		$str = '';
 		$append = false;
 		foreach($pre->find('span') as $element) {
@@ -86,8 +85,8 @@ class StryktipsetAPI
 			$teams = explode('-', $temp[1]);
 			$row = array();
 			$row['MatchNo']		= intval($temp[0]);
-			$row['HomeTeam']	= $teams[0];
-			$row['AwayTeam']	= $teams[1];
+			$row['HomeTeam']	= StryktipsetAPI::nameMapper($teams[0]);
+			$row['AwayTeam']	= StryktipsetAPI::nameMapper($teams[1]);
 			$row['HomeWin']		= intval($temp[2]);
 			$row['Draw']		= intval($temp[3]);
 			$row['AwayWin']		= intval($temp[4]);
@@ -95,5 +94,21 @@ class StryktipsetAPI
 		}
 		return json_encode($rows);
 	}
+	
+	/**
+	*	Fullösning på att Stryktipset och football-data har olika namn på lagen
+	*/
+	private static function nameMapper($name) {
+		$name = $name === 'Aston V.' ? 'Aston Villa' : $name;
+		$name = $name === 'Birmingh.' ? 'Birmingham' : $name;
+		$name = $name === 'Bournem.' ? 'Bournemouth' : $name;
+		$name = $name === 'Crystal P' ? 'Crystal Palace' : $name;
+		$name = $name === 'Manch.C' ? 'Man City' : $name;
+		$name = $name === 'Middlesbr' ? 'Middlesbrough' : $name;
+		$name = $name === 'Milton Ke' ? 'Milton Keynes Dons' : $name;
+		$name = $name === 'Queens PR' ? 'QPR' : $name;
+		$name = $name === 'Sheff.W' ? 'Sheffield Weds' : $name;
+		$name = $name === 'Sunderl.' ? 'Sunderland' : $name;
+		return $name;
+	}
 }
-?>
