@@ -2,7 +2,7 @@
 use \Psr\Http\Message\ServerRequestInterface as Request;
 use \Psr\Http\Message\ResponseInterface as Response;
 
-require 'vendor/autoload.php';
+require 'app/vendor/autoload.php';
 
 $app = new \Slim\App;
 
@@ -20,7 +20,7 @@ $app->add(function (Request $request, Response $response, callable $next) {
 });
 
 $app->group('/api/stryktipset', function () {
-	require 'api/cStryktipsetApi.php';
+	require 'app/api/cStryktipsetApi.php';
 	
 	$this->get('', function (Request $request, Response $response) {
 		$response = $response->withHeader('Content-type', 'application/json');
@@ -36,7 +36,7 @@ $app->group('/api/stryktipset', function () {
 });
 
 $app->group('/api/matches', function () {
-	require 'api/cMatchesApi.php';
+	require 'app/api/cMatchesApi.php';
 	header("Content-Type: application/json");
 
 	$this->get('', function (Request $request, Response $response) {
