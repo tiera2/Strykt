@@ -1,18 +1,9 @@
-Så där. Blev nog matförgiftad tror jag. Spydde en gång i natt och nu är allt som vanligt igen. 
-Lustigt med träningen. Jag har gjort nästan exakt samma, buggade något år i Karlstad (två eller tre kurser), tränade styrka på SATS, boxades samt löptränade ganska mycket tills jag pajade knät.
-Om du lär dig Swing får du åka till Chicago i Stockholm. En kollega som dansar mycket swing talar sig varm om det stället. De har tydligen swingkvällar två eller tre gånger i veckan. Finns även en jättestor swingfestival eller nåt sånt varje år runt Stockholm nånstans.
-Jag läste ganska mycket böcker ett tag på pendeltåget men sen bestämde jag mig för att ta mig igenom One Piece som så många pratar om. Fast egentligen borde jag väl kanske läsa lite "finare" litteratur. Börjar få en rejäl stapel med böcker som bara ligger. Det är kul att handla böcker iaf smile emoticon. SF Bokhandeln är nog min favoritaffär!
-Jag har för mig att du ville jobba med kirurgi redan när du gick i skolan? Varför är det första gången du jobbar på en sån avdelning först nu?
-Tur du har en gubbe som får dra ström. Sånt är svindyrt! (om man inte har tur att hitta en gammal räv i Torsbys utkanter...). Jag kommer nog inte göra några större ingrepp. Nuvarande ägarna sa att det är betongväggar med rör i typ överallt så det går inte att göra så mycket. Tänkte köpa en ny spis, det är väl allt. Det är nu man börjar fatta hur jäkla dyrt saker är. Fyra nya köksstolar, 2000 kr! Ny spis, 6000 kr! Mina stackars pesetas...
-Att det blev Stockholm var inte direkt för att jag brinner för huvudstaden utan snarare för att de flesta jobben finns där samt att det nog finns bättre möjligheter för Marcela (min tjej) att hitta något där. Men i och med att hon är geolog kan vi lika gärna hamna uppe i Norrland eller Norge om något år om hon får jobb där. 
-Har sett på facebook att du/ni reser en del. Har ni tågluffat än? Vi gjorde det för något år sen runt jul. Riktigt roligt att se Europa för så lite som möjligt! Det rekommenderar jag varmt om ni inte gjort det. Fast när jag tänker efter kanske det inte passar alla. Man lever inte något lyxliv direkt.
-
-
-Fast det är väl en skillnad när man har ett viktigt mål att nå smile emoticon 
-Fin lägenhet! Ja man behöver inte så mkt! Du kan sätta upp och riva väggar så får du en walk-in-closet grin emoticon Vårt radhus, bostadsrätt oxå, gick på 1,75 milj. Då är vi ändå två st. Du anar inte vilken ångest jag hade inför köpet. Jag tycker det är dyrt att köpa ett par jeans för 500 kr! Först så kollade vi egentligen på en trea i centrum för samma peng, men sen dök denna upp och vi körde på de istället. Hamnade närmare syrran så det blev bra. Just nu är vi i renoveringsfasen och har tänkt göra om vår övervåning (sovrum x2, hall/trapphus och badrum. Än så länge är sovrummen (varav ett blev datarum) fixade. I jan tänkte vi börja med hall/trapphus. Det är så himla kul! Skickat lite före och efterbilder smile emoticon
-Haha de där med att träna går upp och ner för mig med. Jag red i två år men sen tyckte jag de blev för dyrt men det är himla roligt! Jag fick lära mig grunderna. Starta, stanna, trava, galopera och hoppa tongue emoticon
-Bokning på Irland låter nästan farligt tongue emoticon Jag tränade rätt så regelbundet ett tag. Både buggade, löpning, styrka och thaibokningen. Sen pajade jag knät och därefter gick de utför. Nu när jag "ligger ute" så blir de itne så mkt heller. Långa promenader brukar de bli för jag försöker skippa bussen smile emoticon De är ju så jäkla mörkt ute att de blir läskigt att löpträna. Nu när jag kommer hem till våren så ska jag börja med styrka och thai igen. Blir nog nån kurs i west coast swing oxå!
-Japp, jag läser massor fortfarande. Köper alla de böcker jag läser så snart har jag ett bibliotek! De bästa jag vet är att ta ejj riktigt varmt bubbelbad, äta choklad och läsa. Skönt efter en jobbig/hemsk dag på jobbet. Vissa saker etsar sig fast så de är skönt att tänka på annat, därav läsningen.
-Målet med mitt jobb är ju att hålla mina patienter levande, såvida det inte är sagt att de är döende och ska ha sån vård. När jag kommer till en avdelning för tex en vecka så visar de mig det viktigaste bara (akutvagnen, brandvägar, nr till läkare och läkemedelsrummet). Därefter sköter jag "mitt", man jobbar ju ihop med flera så jag är ju aldrig helt ensam eller utlämnad. När jag jobbar enstaka pass så brukar det vara nattetid och då är de oftast med 1-2 ssk till så då är det bara att hänga på dem. Då är jag bara "ett huvud" att fylla ut personalen med.
-Torsby har jättebrist men eftersom landstinget har gått flera miljoner back så har de inte råd att anställa. Tror de tom är anställningsstopp! Just nu är jag på en kiruravdelning. jag har aldrig jobbat på en sån avdelning förut så jag är helt utanför min komfort-zon! Men än går det bra men jag var väldigt tafatt i början. Och på sjukhuset hittar jag inte ens. Jag kan ta mig till min avdelning, det är de jag behöver tongue emoticon behövs det springa akut någon annanstans så får någon annan fixa det smile emoticon
-Allt blir bättre när man har kört en tid. Jag var rätt så osäker när jag började som ssk. Jag menar jag kunde bokstavligen ta död på någon om jag gav vissa läkemedel för snabbt eller för mkt
+app.controller("MatchesCtrl", function($scope, $http) {
+  $http.get('./api/stryktipset').
+    success(function(data, status, headers, config) {
+      $scope.matches = data;
+    }).
+    error(function(data, status, headers, config) {
+      // log error
+    });
+});
