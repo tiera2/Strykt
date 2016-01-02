@@ -1,0 +1,51 @@
+<html>
+<head>
+<style>
+	table {
+		color: maroon;
+	}
+	
+	.leagueTableTeam {
+		color: blue;
+	}
+</style>
+<script src="./webInterface/assets/libs/angular.min.js"></script>
+<script>
+var app = angular.module("MyApp", []);
+
+app.controller("TableCtrl", function($scope, $http) {
+$scope.dataLoaded = false;
+  $http.get('./api/tables').
+    success(function(data, status, headers, config) {
+      $scope.standings = data;
+	  $scope.dataLoaded = true;
+    }).
+    error(function(data, status, headers, config) {
+      // log error
+    });
+});
+
+</script>
+
+</head>
+
+<body ng-app="MyApp">
+<p class="text-center" ng-hide="dataLoaded">
+    Loading..
+</p>
+  <table class="leagueTable" ng-controller="TableCtrl">
+    <tr ng-repeat="standing in standings">
+	 <td class="leagueTableCount">{{standing.position}}</td>
+	 <td class="leagueTableTeam"><a href="api/matches/{{standing.teamName}}">{{standing.teamName}}</a></td>
+	 <td>{{standing.playedGames}}</td>
+	 <td>{{standing.wins}}</td>
+	 <td>{{standing.draws}}</td>
+	 <td>{{standing.losses}}</td>
+	 <td>{{standing.goals}}</td>
+	 <td>{{standing.goalsAgainst}}</td>
+	 <td>{{standing.goals - standing.goalsAgainst}}</td>
+	 <td>{{standing.points}}</td>
+    </tr>
+  </table>
+</body>
+
