@@ -68,27 +68,22 @@ $app->get('/api/tables', function (Request $request, Response $response, $args) 
 });
 
 $app->get('/stryktipset', function (Request $request, Response $response) {
-	$response->getBody()->write(file_get_contents("webInterface/teststryktips.html"));
+	$response->getBody()->write(file_get_contents("webInterface/views/stryktipsView.html"));
 	return $response;
 });
 
 $app->get('/matches', function (Request $request, Response $response) {
-	$response->getBody()->write(file_get_contents("webInterface/testmatches.html"));
+	$response->getBody()->write(file_get_contents("webInterface/views/matchesView.html"));
 	return $response;
 });
 
 $app->get('/table', function (Request $request, Response $response) {
-	$response->getBody()->write(file_get_contents("webInterface/testtable.html"));
+	$response->getBody()->write(file_get_contents("webInterface/views/tableView.html"));
 	return $response;
 });
 
 $app->get('/', function (Request $request, Response $response) {
-	$response->getBody()->write("kör denna för att hämta matcher <a href='api/matches'>länk</a><br />
-	Kör <a href='api/stryktipset'>denna</a> för att hämta stryktipsmatcherna<br />
-	Hämta Liverpools 20 senaste matcher <a href='api/matches/Liverpool?limit=20'>här</a><br />
-	Hämta matcher med Arsenal och Liverpool <a href='api/matches/Liverpool,Arsenal'>här</a><br />
-	Test att hämta stryktipskupongen och lägga ut med Angular <a href='stryktipset'>här</a><br />
-	<a href='table'>Tabellen</a>. Hämta JSON för Premier League-tabellen <a href='api/tables'>här</a><br />");
+	$response->getBody()->write(file_get_contents("webInterface/index.html"));
 	return $response;
 });
 
