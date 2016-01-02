@@ -88,7 +88,7 @@ $app->get('/', function (Request $request, Response $response) {
 	Hämta Liverpools 20 senaste matcher <a href='api/matches/Liverpool?limit=20'>här</a><br />
 	Hämta matcher med Arsenal och Liverpool <a href='api/matches/Liverpool,Arsenal'>här</a><br />
 	Test att hämta stryktipskupongen och lägga ut med Angular <a href='stryktipset'>här</a><br />
-	<a href='table'>Tabellen</a>. Hämta JSON för Premier League-tabellen <a href='api/table'>här</a><br />");
+	<a href='table'>Tabellen</a>. Hämta JSON för Premier League-tabellen <a href='api/tables'>här</a><br />");
 	return $response;
 });
 
