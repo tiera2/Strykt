@@ -10,13 +10,14 @@ class MatchesApi
 	* 
 	*/
 	public static function getMatches() {
+        $dataPath = "app/data/";
 		$leagues = array('E0', 'E1');
 		$seasons = array('1516', '1415', '1314', '1213');
 		$games = array();
 		foreach($leagues as $league) {
 			foreach($seasons as $season) {
 				$filename = $league . '_' . $season . '.csv';
-				MatchesApi::loadFile($filename, $league, $season);
+				MatchesApi::loadFile($dataPath . $filename, $league, $season);
 				$csv = array_map('str_getcsv', file($filename));
 				$csv_pos = array();
 				
@@ -93,15 +94,15 @@ class MatchesApi
 	 * @param string $league E0=PL, E1=Championship
 	 * @param string $season ex. 1516, 1415
 	 */
-	private static function loadFile($filename, $league, $season) {
-		$downloadFile = !file_exists($filename);
+	private static function loadFile($filePath, $league, $season) {
+		$downloadFile = !file_exists($filePath);
 		if(!$downloadFile) {
-			$fileDate = date('y-m-d', filemtime($filename));
+			$fileDate = date('y-m-d', filemtime($filePath));
 			$today = date('y-m-d');
 			$downloadFile = $fileDate !== $today;
 		}
 		if($downloadFile) {
-			file_put_contents($filename, fopen("http://www.football-data.co.uk/mmz4281/$season/$league.csv", 'r'));
+			file_put_contents($filePath, fopen("http://www.football-data.co.uk/mmz4281/$season/$league.csv", 'r'));
 		}
 	}
 }
