@@ -1,1 +1,1 @@
-https://scotch.io/tutorials/angularjs-best-practices-directory-structure
+http://briantford.com/blog/huuuuuge-angular-apps
