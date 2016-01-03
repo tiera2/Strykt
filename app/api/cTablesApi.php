@@ -10,7 +10,7 @@ class TablesApi
 	* 
 	*/
 	static function getPremierLeagueTable() {
-		$filename = 'tables.txt';
+		$filename = 'app/data/tables.json';
 		$downloadFile = !file_exists($filename);
 		if(!$downloadFile) {
 			$fileDate = date('y-m-d', filemtime($filename));
@@ -41,10 +41,6 @@ class TablesApi
 			$standing['draws']			= $value['draws'];
 			$standing['losses']			= $value['losses'];
 			$standing['points']			= $value['points'];
-				/**
-			*	Fullösning på att Stryktipset och football-data har olika namn på lagen
-			*/
-			
 			$retArr[] = $standing;
 		}
 		return json_encode($retArr);

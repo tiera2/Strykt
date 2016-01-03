@@ -18,7 +18,7 @@ class MatchesApi
 			foreach($seasons as $season) {
 				$filename = $league . '_' . $season . '.csv';
 				MatchesApi::loadFile($dataPath . $filename, $league, $season);
-				$csv = array_map('str_getcsv', file($filename));
+				$csv = array_map('str_getcsv', file($dataPath . $filename));
 				$csv_pos = array();
 				
 				foreach($csv as $key => $value) {
