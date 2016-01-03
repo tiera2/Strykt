@@ -1,6 +1,6 @@
 <?php
 
-include_once('simple_html_dom.php');
+include_once('app/lib/simple_html_dom.php');
 
 class StryktipsetAPI 
 {
