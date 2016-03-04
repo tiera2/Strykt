@@ -40,10 +40,8 @@ $app->group('/api/matches', function () {
 	header("Content-Type: application/json");
 
 	$this->get('', function (Request $request, Response $response) {
-		echo MatchesApi::getMatches();
-		// Add exit to prevent that last characters is cut off
-		// http://stackoverflow.com/questions/8811588/webkit-cutting-off-last-character-of-a-json-feed
-		exit;
+		flush();
+		return MatchesApi::getMatches();
 	})->setName('matches');
 
 	$this->get('/{team}', function (Request $request, Response $response, $args) {
@@ -52,10 +50,8 @@ $app->group('/api/matches', function () {
 		if(array_key_exists('limit', $parm)) {
 			$limit = intval($parm['limit']);
 		}
-		echo MatchesApi::getTeam($args['team'], $limit);
-		// Add exit to prevent that last characters is cut off
-		// http://stackoverflow.com/questions/8811588/webkit-cutting-off-last-character-of-a-json-feed
-		exit;
+		flush();
+		return MatchesApi::getTeam($args['team'], $limit);
 	})->setName('matches-team');
 });
 
