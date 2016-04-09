@@ -80,17 +80,18 @@ class StryktipsetAPI
 		
 		$arr = explode("\\", $str);
 		$rows = array();
+		$rows = array('matches' => array());
+		$rows['matches']['match'] = array();
 		foreach($arr as $value) {
 			$temp = explode(',', $value);
 			$teams = explode('-', $temp[1]);
-			$row = array();
-			$row['MatchNo']		= intval($temp[0]);
-			$row['HomeTeam']	= StryktipsetAPI::nameMapper($teams[0]);
-			$row['AwayTeam']	= StryktipsetAPI::nameMapper($teams[1]);
-			$row['HomeWin']		= intval($temp[2]);
-			$row['Draw']		= intval($temp[3]);
-			$row['AwayWin']		= intval($temp[4]);
-			$rows[] = $row;
+			$rows['matches']['match'][] = array(
+					'Id' 		=> intval($temp[0]),
+					'HomeTeam' 	=> StryktipsetAPI::nameMapper($teams[0]),
+					'AwayTeam'	=> StryktipsetAPI::nameMapper($teams[1]),
+					'HomeWin' 	=> intval($temp[2]),
+					'Draw' 		=> intval($temp[3]),
+					'AwayWin' 	=> intval($temp[4]));
 		}
 		return json_encode($rows);
 	}
